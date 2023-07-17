@@ -10,7 +10,7 @@ public class CharacterTest {
   boolean alive = true;
   int damage = 100;
 
-  int heal = 300;
+  int heal;
   Character character = new Character(health, level, alive, damage);
     @Test
     public void health_should_start_with_1000() {
@@ -48,7 +48,11 @@ public class CharacterTest {
     }
     @Test
     public void character_should_can_heal(){
-      assertEquals(character.heal());
+      assertEquals(1000,character.heal(100));
     }
 
+    @Test
+    public void character_should_not_receive_damage_from_itself() {
+
+    }
 }

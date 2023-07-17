@@ -32,7 +32,10 @@ public class Character {
         if (alive = false) {
             return this.health;
         } else {
-            return this.health += heal;
+            while(this.health < 1000) {
+                return this.health += heal;
+            }
+            return this.health;
         }
     }
 }
