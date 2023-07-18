@@ -3,39 +3,49 @@ package org.rpgcombat;
 public class Character {
     int health;
     int level;
-    boolean alive;
-    int damage;
+    boolean alive = true;
+    int strength;
 
-    public Character(int health, int level, boolean alive, int damage) {
+    public Character(int health, int level) {
         this.health = health;
         this.level = level;
-        this.alive = alive;
-        this.damage = damage;
     }
 
-    public int attack() {
-        return this.damage;
-    }
-    public int receiveDamage(int damage) {
-        return this.health -= damage;
+    public int getHealth() {
+        return health;
     }
 
-    public boolean isAlive() {
-        if (this.health <= this.damage) {
-            return alive = false;
-        } else {
-            return alive = true;
-        }
+    public void setHealth(int health) {
+        this.health = health;
     }
 
-    public int heal(int heal) {
-        if (alive = false) {
-            return this.health;
-        } else {
-            while(this.health < 1000) {
-                return this.health += heal;
+    public int getLevel() {
+        return level;
+    }
+
+    public void setLevel(int level) {
+        this.level = level;
+    }
+
+    public void setStrength(int strength) {
+        this.strength = strength;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int attackCharacter(int damage,  Character defensor) {
+        if (this.alive && defensor.alive) {
+            defensor.setHealth(defensor.getHealth() - damage) ;
+            if (defensor.getHealth() <= 0) {
+                defensor.setHealth(0);
+                defensor.alive = false;
             }
-            return this.health;
+            return defensor.getHealth();
         }
+        return defensor.getHealth();
     }
+
+
 }

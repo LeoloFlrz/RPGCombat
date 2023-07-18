@@ -7,52 +7,37 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CharacterTest {
   int health = 1000;
   int level = 1;
-  boolean alive = true;
-  int damage = 100;
 
-  int heal;
-  Character character = new Character(health, level, alive, damage);
-    @Test
-    public void health_should_start_with_1000() {
+  Character manolo = new Character(health, level);
+  Character juana = new Character(health, level);
 
-      assertTrue(character.health >= 1000);
-    }
-    @Test
-    public void level_should_start_at_1() {
-      assertTrue(character.level == 1);
-    }
+  @Test
+  public void Health_starting_at_1000() {
+    assertTrue(manolo.getHealth() == 1000);
+  }
 
-    @Test
-    public void character_should_be_alive() {
-      assertTrue(character.alive);
-    }
+  @Test
+  public void Level_starting_at_1() {
+    assertTrue(manolo.getLevel() == 1);
+  }
+  @Test
+  public void may_be_Alive_or_Dead_starting_Alive() {
+      assertTrue(manolo.alive);
+      assertTrue(juana.alive);
+  }
 
-    @Test
-    public void character_should_have_damage() {
-      assertNotNull(character.damage);
-    }
+  @Test
+  public void damage_is_subtracted_from_Health() {
+    assertEquals(900, manolo.attackCharacter(100, juana));
+    assertEquals(0, juana.attackCharacter(1100, manolo));
+  }
 
-    @Test
-    public void damage_should_substract_from_health() {
-      assertTrue(character.attack() == 100);
-    }
+  @Test
+  public void when_damage_received_exceeds_current_Health_becomes_0_and_the_character_dies() {
+    juana.setHealth(100);
+    manolo.attackCharacter(150, juana);
 
-    @Test
-    public void should_substract_damage_from_health() {
-      assertEquals(900, character.receiveDamage(100));
-    }
-
-    @Test
-    public void if_health_is_below_0_character_should_be_dead() {
-      assertTrue(character.isAlive());
-    }
-    @Test
-    public void character_should_can_heal(){
-      assertEquals(1000,character.heal(100));
-    }
-
-    @Test
-    public void character_should_not_receive_damage_from_itself() {
-
-    }
+    assertEquals(0, juana.getHealth());
+    assertFalse(juana.alive);
+  }
 }
