@@ -40,4 +40,29 @@ public class CharacterTest {
     assertEquals(0, juana.getHealth());
     assertFalse(juana.alive);
   }
+
+  @Test
+  public void A_Character_can_Heal_a_Character() {
+    juana.setHealth(900);
+    manolo.setHealth(999);
+    juana.heal();
+    manolo.heal();
+    assertTrue(juana.getHealth() == 1000);
+    assertEquals(1000, manolo.getHealth());
+  }
+
+  @Test
+  public void Dead_characters_cannot_be_healed() {
+    manolo.setHealth(50);
+    juana.attackCharacter(100, manolo);
+    manolo.heal();
+    assertFalse(manolo.alive);
+  }
+
+  @Test
+  public void Healing_cannot_raise_health_above_1000() {
+    manolo.setHealth(900);
+    manolo.heal();
+    assertEquals(1000, manolo.getHealth());
+  }
 }

@@ -6,6 +6,10 @@ public class Character {
     boolean alive = true;
     int strength;
 
+    public void setAlive(boolean alive) {
+        this.alive = alive;
+    }
+
     public Character(int health, int level) {
         this.health = health;
         this.level = level;
@@ -27,6 +31,10 @@ public class Character {
         this.level = level;
     }
 
+    public boolean isAlive() {
+        return alive;
+    }
+
     public void setStrength(int strength) {
         this.strength = strength;
     }
@@ -40,12 +48,21 @@ public class Character {
             defensor.setHealth(defensor.getHealth() - damage) ;
             if (defensor.getHealth() <= 0) {
                 defensor.setHealth(0);
-                defensor.alive = false;
+                defensor.setAlive(false);
             }
             return defensor.getHealth();
         }
         return defensor.getHealth();
     }
 
+    public int heal() {
+        if (this.isAlive()) {
+            this.setHealth(1000);
+        } else {
+            this.setAlive(false);
+            return this.getHealth();
+        }
+        return this.getHealth();
+    }
 
 }
