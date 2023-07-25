@@ -65,4 +65,23 @@ public class CharacterTest {
     manolo.heal();
     assertEquals(1000, manolo.getHealth());
   }
+
+  @Test
+  public void A_Character_cannot_Deal_Damage_to_itself() {
+    manolo.setStrength(100);
+    juana.setStrength(50);
+
+    manolo.attackCharacter(manolo.getStrength(), manolo);
+    juana.attackCharacter(juana.getStrength(), juana);
+
+    assertTrue(manolo.isAlive());
+    assertTrue(juana.isAlive());
+    assertEquals(health, manolo.getHealth());
+    assertEquals(health, juana.getHealth());
+  }
+
+  @Test
+  public void A_Character_can_only_Heal_itself() {
+
+  }
 }

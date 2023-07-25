@@ -44,6 +44,9 @@ public class Character {
     }
 
     public int attackCharacter(int damage,  Character defensor) {
+        if (this == defensor) {
+            return defensor.getHealth();
+        }
         if (this.alive && defensor.alive) {
             defensor.setHealth(defensor.getHealth() - damage) ;
             if (defensor.getHealth() <= 0) {
