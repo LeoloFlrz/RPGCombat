@@ -58,13 +58,18 @@ public class Character {
         return defensor.getHealth();
     }
 
-    public int heal() {
-        if (this.isAlive()) {
-            this.setHealth(1000);
+    public int heal(Character objetivo) {
+        if(this == objetivo) {
+            if (this.isAlive()) {
+                this.setHealth(1000);
+            } else {
+                this.setAlive(false);
+                return this.getHealth();
+            }
         } else {
-            this.setAlive(false);
-            return this.getHealth();
+            return this.health;
         }
+
         return this.getHealth();
     }
 

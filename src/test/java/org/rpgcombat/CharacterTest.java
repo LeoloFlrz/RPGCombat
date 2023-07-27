@@ -45,8 +45,8 @@ public class CharacterTest {
   public void A_Character_can_Heal_a_Character() {
     juana.setHealth(900);
     manolo.setHealth(999);
-    juana.heal();
-    manolo.heal();
+    juana.heal(juana);
+    manolo.heal(manolo);
     assertTrue(juana.getHealth() == 1000);
     assertEquals(1000, manolo.getHealth());
   }
@@ -55,14 +55,14 @@ public class CharacterTest {
   public void Dead_characters_cannot_be_healed() {
     manolo.setHealth(50);
     juana.attackCharacter(100, manolo);
-    manolo.heal();
+    manolo.heal(manolo);
     assertFalse(manolo.alive);
   }
 
   @Test
   public void Healing_cannot_raise_health_above_1000() {
     manolo.setHealth(900);
-    manolo.heal();
+    manolo.heal(manolo);
     assertEquals(1000, manolo.getHealth());
   }
 
@@ -82,6 +82,21 @@ public class CharacterTest {
 
   @Test
   public void A_Character_can_only_Heal_itself() {
+    manolo.setHealth(900);
+    juana.setHealth(800);
+
+    manolo.heal(manolo);
+    manolo.heal(juana);
+
+    assertEquals(1000, manolo.getHealth());
+    assertEquals(800, juana.getHealth());
+  }
+
+  @Test
+  public void If_the_target_is_5_or_more_Levels_above_the_attacker_Damage_is_reduced_by_50() {
+    manolo.setLevel(6);
+    juana.setLevel(1);
+
 
   }
 }
